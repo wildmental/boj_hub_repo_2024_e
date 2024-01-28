@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 class Main {
@@ -5,11 +8,11 @@ class Main {
     static List<Integer> suspectIdx = new ArrayList<>(2);
     static List<Integer> excludeSuspectIdx = new ArrayList<>(7);
     static int allSum;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // 입력부 작성
-        Scanner sc = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         for (int i=0; i<9; i++) {
-            dwarfs.add(Integer.parseInt(sc.nextLine().strip()));
+            dwarfs.add(Integer.parseInt(br.readLine().strip()));
         }
         Collections.sort(dwarfs);
         allSum = dwarfs.stream().mapToInt(Integer::intValue).sum();
