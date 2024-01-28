@@ -11,16 +11,20 @@ class Main {
     public static void main(String[] args) throws IOException {
         // 입력부 작성
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int height;
         for (int i=0; i<9; i++) {
-            dwarfs.add(Integer.parseInt(br.readLine().strip()));
+            height = Integer.parseInt(br.readLine().strip());
+            dwarfs.add(height);
+            allSum += height;
         }
+        // 정렬
         Collections.sort(dwarfs);
-        allSum = dwarfs.stream().mapToInt(Integer::intValue).sum();
+
+        // 순회하며 검사
         for (int i=0; i<9; i++) {
-            // 총 2명을 제외 시켜야 하기 때문에
-            // 혼자서도 allSum-100 보다 키가 큰 녀석은 용의선에서 제외한다.
+            // (short cut 1) 총 2명을 제외 시켜야 하기 때문에 혼자서도 allSum-100 보다 키가 큰 녀석은 용의선에서 제외한다.
             if (dwarfs.get(i) > allSum-100) {
-                // <종료 조건 1> (short cut) 처음 나타난 i가 7인 경우 앞선 7명으로 확정
+                // <종료 조건 1> (short cut 2) 처음 나타난 i가 7인 경우 앞선 7명으로 확정
                 if (excludeSuspectIdx.isEmpty() && i == 7) break;
                 excludeSuspectIdx.add(i);
                 continue;
